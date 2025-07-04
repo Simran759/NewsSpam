@@ -1,23 +1,30 @@
 import streamlit as st
 import pickle
 import re
-from preprocessing import Preprocessing
 import nltk
+
+# Download necessary NLTK resources
 nltk.download('wordnet')
 nltk.download('stopwords')
 
-# Load model and TF-IDF
+from preprocessing import Preprocessing
+
+# Load trained model and TF-IDF vectorizer
 model = pickle.load(open("model.pkl", "rb"))
 tfidf = pickle.load(open("tfidf.pkl", "rb"))
 
+# App UI
+st.set_page_config(page_title="Fake News Detector", layout="centered")
 st.title("📰 Fake News Detector")
 st.write("Enter a news article below to check if it's fake or real.")
 
+# User input
 user_input = st.text_area("Paste your news article here...")
 
+# Prediction
 if st.button("Predict"):
     if user_input.strip() == "":
-        st.warning("Please enter some text.")
+        st.warning("⚠️ Please enter some text.")
     else:
         preprocessed = Preprocessing(user_input).text_preprocessing_user()
         vectorized = tfidf.transform(preprocessed)
