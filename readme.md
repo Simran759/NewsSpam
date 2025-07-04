@@ -92,17 +92,17 @@ Deployed as a **Streamlit Web App** where users can:
 ---
 
 ## 📁 Project Structure
+```
+NewsSpam/
+├── app.py                # Streamlit web app
+├── model.pkl             # Trained Random Forest model
+├── tfidf.pkl             # TF-IDF vectorizer
+├── preprocessing.py      # Text preprocessing module
+├── requirements.txt      # Required packages
+├── .gitignore            # Ignore unnecessary files (e.g., venv)
+└── README.md             # This documentation
 
-📦 NewsSpam/
-├── app.py # Streamlit interface
-├── model.pkl # Trained Random Forest model
-├── tfidf.pkl # TF-IDF vectorizer
-├── preprocessing.py # Text cleaning functions
-├── requirements.txt # Python dependencies
-├── .gitignore # Excludes venv, cache, etc.
-└── README.md # This file
-
-
+```
 ---
 
 ## 🧠 Final Thought
