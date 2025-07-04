@@ -16,30 +16,15 @@ tfidf = pickle.load(open("tfidf.pkl", "rb"))
 # App UI
 st.set_page_config(page_title="Fake News Detector", layout="centered")
 st.title("📰 Fake News Detector")
-st.write("Enter a news article title below to check if it's fake or real.")
+st.write("Enter a news article **title** below to check if it's fake or real.")
 
-# Example headlines
-st.markdown("#### 🔍 Try Example Headlines")
-col1, col2 = st.columns(2)
-
-if "example_text" not in st.session_state:
-    st.session_state.example_text = ""
-
-with col1:
-    if st.button("🚨 Example Fake"):
-        st.session_state.example_text = "Schaeuble to head German parliament, unblocking coalition talks"
-
-with col2:
-    if st.button("✅ Example Real"):
-        st.session_state.example_text = "5 Ways The Media Responded With Butthurt To Donald Trumpâ€™s Victory"
-
-# User input (from manual or example)
-user_input = st.text_area("Paste your news article here...", value=st.session_state.example_text)
+# User input
+user_input = st.text_area("📝 Paste your news article title here:")
 
 # Prediction
-if st.button("Predict"):
+if st.button("🔍 Predict"):
     if user_input.strip() == "":
-        st.warning("⚠️ Please enter some text.")
+        st.warning("⚠️ Please enter a news title.")
     else:
         preprocessed = Preprocessing(user_input).text_preprocessing_user()
         vectorized = tfidf.transform(preprocessed)
@@ -49,3 +34,10 @@ if st.button("Predict"):
             st.error("🚨 The news is FAKE.")
         else:
             st.success("✅ The news is REAL.")
+
+# Suggested example titles
+st.markdown("---")
+st.markdown("### 🧪 Try These Example Titles:")
+st.markdown("- **Fake News Example:** `Schaeuble to head German parliament, unblocking coalition talks`")
+st.markdown("- **Real News Example:** `5 Ways The Media Responded With Butthurt To Donald Trump’s Victory`")
+st.markdown("_Paste any of the above into the input box above and click Predict to test your model._")
