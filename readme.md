@@ -1,5 +1,8 @@
 # 📰 Fake News Detection using Titles Only
 
+## 🔗 Live Demo  
+👉 [Click here to try the Fake News Classifier App](https://newsspam-yutxkyvh7br8fakbeqjwb4.streamlit.app/)
+
 This project is a machine learning-based classifier that detects whether a news article is **fake or real**, using only the **title** of the article. Built with `Random Forest`, the model is optimized for speed and performance using a clean and effective text preprocessing pipeline.
 
 ---

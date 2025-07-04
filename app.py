@@ -16,7 +16,7 @@ tfidf = pickle.load(open("tfidf.pkl", "rb"))
 # App UI
 st.set_page_config(page_title="Fake News Detector", layout="centered")
 st.title("📰 Fake News Detector")
-st.write("Enter a news article below to check if it's fake or real.")
+st.write("Enter a news article title below to check if it's fake or real.")
 
 # User input
 user_input = st.text_area("Paste your news article here...")
