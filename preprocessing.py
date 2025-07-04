@@ -2,6 +2,16 @@ import re
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 stop_words = set(stopwords.words('english'))
+import nltk
+
+# Try to download stopwords if not already downloaded
+try:
+    from nltk.corpus import stopwords
+    stop_words = set(stopwords.words('english'))
+except LookupError:
+    nltk.download('stopwords')
+    from nltk.corpus import stopwords
+    stop_words = set(stopwords.words('english'))
 
 class Preprocessing:
     def __init__(self, data):
