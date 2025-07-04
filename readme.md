@@ -1,111 +1,85 @@
-# 📰 Fake News Detection using Titles Only
+# 📰 Fake News Title Classifier
 
-## 🔗 Live Demo  
-👉 [Click here to try the Fake News Classifier App](https://newsspam-yutxkyvh7br8fakbeqjwb4.streamlit.app/)
+A machine learning web application that detects whether a news **title** is fake or real using **NLP** and a **Random Forest classifier**, deployed with **Streamlit**.
 
-This project is a machine learning-based classifier that detects whether a news article is **fake or real**, using only the **title** of the article. Built with `Random Forest`, the model is optimized for speed and performance using a clean and effective text preprocessing pipeline.
-
----
-
-## 📌 Why Only Title?
-
-While full article text can provide more information, it:
-- 🔁 Takes more **time to preprocess**
-- 💾 Is **too large in size**
-- 💡 Many fake news headlines are **sensationalized**, so titles alone often carry enough signals to classify accurately.
+🔗 **Live App**: [Streamlit Deployment](https://newsspam-yutxkyvh7br8fakbeqjwb4.streamlit.app)
 
 ---
 
-## 🧩 Project Flow
+## 🚀 Overview
 
-### ✅ 1. Dataset Source
-
-- Extracted from **Kaggle Fake News Dataset**
-- Dataset includes: `id`, `title`, `text`, `label`, etc.
+This project focuses on building a lightweight and efficient fake news detection system using **only the news headline (title)**. The model is trained on a labeled dataset and achieves **93% accuracy** using a Random Forest classifier and TF-IDF vectorization.
 
 ---
 
-### 🔍 2. Data Cleaning
+## 🧠 Why Only Title?
 
-- Removed **null values**
-- Dropped unnecessary columns (`author`, `text`, etc.)
-- Used only:
-  - `title`: for input features
-  - `label`: target (0 = Fake, 1 = Real)
+- Processing full article content is time-consuming and heavy for real-time applications.
+- News titles often contain emotional or misleading cues, sufficient for classification.
+- Improved deployment speed and reduced model complexity.
 
 ---
 
-### 🧹 3. Text Preprocessing
+## 🧪 Model & Approach
 
-Steps applied to each title:
-- Tokenization
-- Lowercasing
-- Stopword removal
-- Lemmatization (to reduce words to their base form)
-- Joined cleaned tokens into processed text
+- **Dataset**: Kaggle Fake News Dataset
+- **Goal**: Binary Classification → Fake / Real
+- **Model**: `RandomForestClassifier` from scikit-learn
+- **Vectorizer**: TF-IDF on `title` column only
 
-> These steps help provide meaningful and uniform data to the model.
+### 🔍 Why Random Forest?
 
----
-
-### 🌲 4. Model Choice: Random Forest Classifier
-
-**Why Random Forest?**
-- Handles **large datasets** and **sparse input** well
-- Reduces **overfitting** through **bagging**
-- Performs better than naive models (like Logistic Regression or Naive Bayes) on this classification task
+- Effective with sparse high-dimensional data like TF-IDF.
+- Resistant to overfitting (ensemble of decision trees).
+- Fast training and prediction, good accuracy.
+- Intuitive and interpretable results.
 
 ---
 
-### 📊 5. Model Training
+## ⚙️ Preprocessing Pipeline
 
-- Converted titles into numerical form using **TF-IDF Vectorization**
-- Split data into training and testing sets
-- Trained using **Random Forest Classifier**
-- Evaluated performance
-
----
-
-### 🎯 6. Results
-
-- Achieved **93% accuracy** on test data
-- Very effective even without using full article text
+1. Dropped null entries and unused columns
+2. Cleaned text with:
+   - Regex removal of non-alphabetic chars
+   - Lowercasing
+   - Stopwords removal
+   - Lemmatization using NLTK
+3. Rejoined words into clean title text
+4. Applied `TfidfVectorizer` for feature extraction
 
 ---
 
-## 🖥️ Technologies Used
+## 📊 Performance
 
-- Python
-- Pandas & NumPy
-- Scikit-learn
-- NLTK (text processing)
-- Streamlit (web app deployment)
+| Metric      | Result  |
+|-------------|---------|
+| Accuracy    | 93%     |
+| Precision   | High    |
+| Inference   | Near Instant |
+| Data Used   | Titles Only (10,000 rows)
 
 ---
 
-## 🚀 Deployment
+## 🧠 Learnings
 
-Deployed as a **Streamlit Web App** where users can:
-- Enter a news title
-- Instantly see if it's predicted as **Fake** or **Real**
+✅ **Applied TF-IDF for feature extraction**, understanding the importance of term weighting in text classification.  
+✅ **Implemented Random Forest** for robust binary classification with high-dimensional input.  
+✅ **Learned how to handle real-world datasets**: cleaning, reducing dimensionality, avoiding overfitting.  
+✅ Understood the tradeoff between **model complexity** and **speed** in deployment scenarios.  
+✅ Gained **hands-on practice with deployment using Streamlit**, improving understanding of real-time ML apps.  
+✅ Practiced **writing reusable components** (e.g., `Preprocessing` class) to ensure cleaner, scalable code.  
+✅ Explored how to convert notebook-based work into a modular and **production-ready app**.  
+✅ Gained insights into model bias (e.g., class imbalance) and how to evaluate it with real user feedback.
 
 ---
 
 ## 📁 Project Structure
-```
-NewsSpam/
-├── app.py                # Streamlit web app
-├── model.pkl             # Trained Random Forest model
-├── tfidf.pkl             # TF-IDF vectorizer
-├── preprocessing.py      # Text preprocessing module
-├── requirements.txt      # Required packages
-├── .gitignore            # Ignore unnecessary files (e.g., venv)
-└── README.md             # This documentation
 
 ```
----
-
-## 🧠 Final Thought
-
-This project demonstrates that even brief inputs like **titles** can be powerful for fake news detection, especially when paired with the right preprocessing and a robust model like Random Forest.
-
+├── app.py # Streamlit web application
+├── preprocessing.py # Preprocessing functions (tokenizing, lemmatizing, cleaning)
+├── model.pkl # Trained Random Forest model (pickle)
+├── tfidf.pkl # TF-IDF vectorizer object
+├── requirements.txt # List of required Python packages
+└── README.md # Project documentation
+```
